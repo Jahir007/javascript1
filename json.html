@@ -10,9 +10,26 @@
 
 <p id="demo1"></p>
 
+<h2>creating object from json literal</h2>
+<p id="demo2"></p>
 
+<h2>creating an object parsing json</h2>
+<p id="demo3"></p>
 
+<h2>Accessing javascript object</h2>
+<p id="demo4"></p>
 
+<h2>Looping object properties</h2>
+<p id="demo5"></p>
+
+<h2>Creating array from JSON</h2>
+<p id="demo6"></p>
+
+<h2>accessing array value</h2>
+<p id="demo7"></p>
+
+<h2>Looping an array</h2>
+<p id="demo8"></p>
 
 
 <script>
@@ -25,6 +42,56 @@
     person1.age = person1.age.toString();
     const txt1 = JSON.stringify(person1);
     document.getElementById("demo1").innerHTML = txt1;
+
+
+    const car = {name:"Ford", model:"Mustang", year:1964, color:null};
+    document.getElementById("demo2").innerHTML = car.model;
+
+    const car1 = {name:"Ford", model:"Mustang", year:1964, color:null};
+    const txt2 = JSON.stringify(car1);
+    document.getElementById("demo3").innerHTML = txt2;
+    
+
+    const myJSON = '{"name":"John", "age":30, "car":null}';
+    const myObj = JSON.parse(myJSON);
+    document.getElementById("demo4").innerHTML = myObj["name"];
+
+
+    const myJson2 = '{"name":"John", "age":30, "car":null}';
+    const myObj2 = JSON.parse(myJson2);
+
+    let text1 = "";
+    for (const x in myObj2) {
+        text1 += myObj2[x] + "<br>";
+    }
+
+    document.getElementById("demo5").innerHTML = text1;
+
+
+    const myJson3 = '["bmw", "audi", "toyota"]';
+    const myArr = JSON.parse(myJson3);
+    document.getElementById("demo6").innerHTML = myArr;
+
+
+    const myJSON4 = '{"name":"John", "age":30, "cars":["Ford", "BMW", "Fiat"]}';
+    const myObj3 = JSON.parse(myJSON4);
+
+    document.getElementById("demo7").innerHTML = myObj3.cars[0];
+
+
+    const myJSON5 = '{"name":"John", "age":30, "cars":["Ford", "BMW", "Fiat"]}';
+    const myObj4 = JSON.parse(myJSON5);
+
+    let text2 = "";
+    for (const x in myObj4.cars) {
+        text2 += myObj4.cars[x] + "<br>";
+    }
+
+    document.getElementById("demo8").innerHTML = text2;
+
+
+</script>
+
 
 
 </script>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+<h2>Get JSON Data from a PHP Server</h2>
+<p>Convert the data into a JavaScript array:</p>
+<p id="demo"></p>
+
+<h2>make a dropdown json data</h2>
+<p id="demo2"></p>
+
+
+
+<script>
+// Create a new XMLHttpRequest object
+
+//const xmlhttp = new XMLHttpRequest();
+//xmlhttp.onload = function() {
+  //const myObj = JSON.parse(this.responseText);
+  //document.getElementById("demo").innerHTML = myObj[3];
+//xmlhttp.open("GET", "p2.php");
+//xmlhttp.send();
+
+const dbparam = JSON.stringify({table:"customer",limit:20});
+const xmlhttp = new XMLHttpRequest();
+xmlhttp.onload = function() {
+
+  const myObj = JSON.parse(this.responseText);
+  let text = "<select>";
+  for(let i=0;i<myObj.length;i++){
+    text += "<option value='"+myObj[i].id+"'>"+myObj[i].name+"</option>";
+  }
+  text += "</select>";
+  document.getElementById("demo2").innerHTML = text;
+}
+
+xmlhttp.open("POST", "p2.php");
+xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xmlhttp.send("dbparam="+dbparam);
+
+
+
+
+
+</script>
+</body>
+</html>

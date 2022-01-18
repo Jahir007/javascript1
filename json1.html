@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+<h2>Convert JavaScript Objects to JSON strings and send them to the server</h2>
+
+
+
+<script>
+
+    const myObj = {
+        name: "John",
+        age: 30,
+        city: "New York"
+    };
+
+
+    const myJSON = JSON.stringify(myObj);
+    window.location = "json2.php?json=" + myJSON;
+
+
+
+</script>    
+
+</body>     
+</html>
