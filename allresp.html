@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        table ,th,td{
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th,td{
+            padding: 5px;
+        }
+
+        th{
+            text-align: left;
+        }
+
+        table{
+            width: 100%;
+        }
+
+        .button {
+            background-color: #f0560f; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+    </style>
+
+
+</head>
+ 
+<body>
+
+ <h2>xmlhttp all response</h2>
+<p id = "demo"></p>   
+
+<h2>response from xml and put in table </h2> 
+<button class="button" onclick="loadDoc()">Show Table</button>
+<table id ="demo1">
+</table>    
+
+<script>
+/*
+const xhttp = new XMLHttpRequest();
+xhttp.onload = function() {
+    //document.getElementById("demo").innerHTML = this.getAllResponseHeaders();
+   document.getElementById("demo").innerHTML = 
+   this.getResponseHeader("Last-Modified");
+}
+xhttp.open("GET", "allresp.html");
+xhttp.send();
+
+*/
+
+function loadDoc() {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+        myFunc(this);
+    }
+    xhttp.open("GET", "cd_catalog.xml");
+    xhttp.send();
+}
+
+function myFunc(xml) {
+    const xmlDoc = xml.responseXML;
+    const x = xmlDoc.getElementsByTagName("CD");
+
+    let table = "<tr><th>Artist</th><th>Title</th></tr>";
+    for (let i = 0; i < x.length; i++) {
+        table += "<tr><td>" +
+        x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
+        "</td><td>" +
+        x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+        "</td></tr>";
+    }
+    document.getElementById("demo1").innerHTML = table;
+}
+
+
+
+
+
+</script>
+
+
+</body>
+
+</html>
