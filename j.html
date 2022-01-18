@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+
+<body>
+
+    <h2>This keyword</h2>
+
+    <p id="demo"></p>
+    <p id = "demo1"></p>
+
+    <h2>Accessing javascript object</h2>
+    <p id = "demo2"></p>
+
+    <h2>Create object from JSON string </h2>
+    <p id = "demo3"></p>
+
+    <h2>Create JSON array to javascript array</h2>
+    <p id = "demo4"></p>
+
+    <H2>Convert the string to date object</h2>
+    <p id = "demo5"></p>
+
+    <h2>Convert the string to date object(altrenative way)</h2>
+    <p id = "demo6"></p>
+
+    <h2>Convert the string to the function</h2>
+    <p id = "demo7"></p>
+
+    <h2>create JSON string from javascript string</h2>
+    <p id = "demo8"></p>
+
+    <h2>Store and retrieve data from local storage</h2>
+    <p id = "demo9"></p>
+    
+    <h2>JSON.stringify() converts date objects into strings.</h2>
+    <p id = "demo10"></p>
+
+
+
+    
+
+
+    <script>
+        //create a object
+         person = {
+            firstName: "John",
+            lastName: "Doe",
+            age: 50,
+            eyeColor: "blue",
+            today: new Date(),
+
+            fullName: () => {
+                return this.firstName + " " + this.lastName;
+            }
+        };
+
+        //document.getElementById("demo").innerHTML = person.fullName();
+        document.getElementById("demo").innerHTML = JSON.stringify(person);
+
+
+        const person1 = {
+            firstName: "John",
+            age: function() {return 22;}
+        };
+
+        document.getElementById("demo1").innerHTML = JSON.stringify(person1);
+
+        const myObj = {name: "John", age: 30, city: "New York"};
+        myObj.name = "Pete";
+
+        //document.getElementById("demo2").innerHTML = myObj.name;
+        document.getElementById("demo2").innerHTML = myObj["name"];
+
+
+        const txt = `{"name":"John","age":30,"city":"New York"}`;
+        const myObj1 = JSON.parse(txt);
+        document.getElementById("demo3").innerHTML = myObj1.name;
+
+
+
+        const txt1 = `["ford","audi","bmw"]`;
+        const myarr = JSON.parse(txt1);
+        document.getElementById("demo4").innerHTML = myarr[0];
+
+
+        const text = '{"name":"John", "birth":"1986-12-14", "city":"New York"}';
+        const obj = JSON.parse(text);
+        obj.birth = new Date(obj.birth);
+        document.getElementById("demo5").innerHTML = obj.name + ", " + obj.birth; 
+
+
+        const text1 = '{"name":"John", "birth":"1986-12-14", "city":"New York"}';
+        const obj1 = JSON.parse(text1, function(key, value) {
+            if (key == "birth") {
+                return new Date(value);
+            } else {
+                return value;
+            }
+        }); 
+        
+        document.getElementById("demo6").innerHTML = obj1.name + ", " + obj1.birth;
+
+
+
+        const p = '{"name":"John", "age":"function() {return 30;}", "city":"New York"}';
+        const ob = JSON.parse(p);
+        ob.age = eval("(" + ob.age + ")");
+        document.getElementById("demo7").innerHTML = ob.name + ", " + ob.age();
+
+
+        const employee = { name: "John", age: 30 , city: "New York",salary: 3000};
+        const myJson = JSON.stringify(employee);  //convert the object to string
+        document.getElementById("demo8").innerHTML = myJson;
+
+        //storing data
+        const myObj2 = {name: "John", age: 30, city: "New York",salary: 3000};
+        const myJson1 = JSON.stringify(myObj2);  //convert the object to string
+        localStorage.setItem("myData", myJson1);
+
+        //retrieving data
+        let t = localStorage.getItem("myData");
+        let myObj3 = JSON.parse(t);
+        document.getElementById("demo9").innerHTML = myObj3.name;
+
+
+        const myObj4 = {name: "John", today: new Date(), city: "New York",age: 30};
+        const myJson2 = JSON.stringify(myObj4);  //convert the object to string
+        document.getElementById("demo10").innerHTML = myJson2;
+
+
+
+    </script>
+</body>
+
+
+</html>
